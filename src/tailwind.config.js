@@ -18,6 +18,13 @@ export default {
         "./resources/views/filament/**/*.blade.php",
         "./vendor/filament/**/*.blade.php",
     ],
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Plus Jakarta Sans", ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
     darkMode: "class",
     plugins: [
         require("@tailwindcss/forms"),

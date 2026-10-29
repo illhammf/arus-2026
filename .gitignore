@@ -10,3 +10,5 @@ src/node_modules/
 # Environment files
 .env
 src/.env
+# Local self-signed TLS private key (generate per machine, never commit)
+nginx/ssl/*.key

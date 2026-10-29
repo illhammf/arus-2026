@@ -12,7 +12,7 @@
 */
 
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
 
 /*
@@ -44,4 +44,19 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function makeUser(array $attributes = []): \App\Models\User
+{
+    return \App\Models\User::factory()->create($attributes);
+}
+
+function makeSuperAdmin(array $attributes = []): \App\Models\User
+{
+    \Spatie\Permission\Models\Role::findOrCreate('super_admin', 'web');
+
+    $user = \App\Models\User::factory()->create($attributes);
+    $user->assignRole('super_admin');
+
+    return $user;
 }

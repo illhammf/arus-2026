@@ -31,13 +31,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->spa()
+            ->brandName('Arus')
             ->login()
             ->passwordReset()
             ->profile(\App\Filament\Pages\Auth\EditProfile::class, isSimple: false)
             ->defaultThemeMode(ThemeMode::Light)
-            ->font('Montserrat')
+            ->font('Plus Jakarta Sans')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Teal,
             ])
             ->maxContentWidth(MaxWidth::SevenExtraLarge)
             ->sidebarCollapsibleOnDesktop()
@@ -53,7 +54,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label('Administration'),
+                    ->label('Keuangan')
+                    ->icon('heroicon-o-wallet'),
+                NavigationGroup::make()
+                    ->label('Perencanaan')
+                    ->icon('heroicon-o-chart-pie'),
+                NavigationGroup::make()
+                    ->label('Administrasi')
+                    ->icon('heroicon-o-shield-check'),
             ])
             ->userMenuItems([
                 'profile' => MenuItem::make()
@@ -96,6 +104,11 @@ class AdminPanelProvider extends PanelProvider
                 \Awcodes\Overlook\OverlookPlugin::make()
                     ->includes([
                         \App\Filament\Admin\Resources\UserResource::class,
+                        \App\Filament\Admin\Resources\FinancialAccountResource::class,
+                        \App\Filament\Admin\Resources\CategoryResource::class,
+                        \App\Filament\Admin\Resources\TransactionResource::class,
+                        \App\Filament\Admin\Resources\BudgetResource::class,
+                        \App\Filament\Admin\Resources\SavingsGoalResource::class,
                     ]),
                 \Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin::make()
                     ->slug('my-profile')

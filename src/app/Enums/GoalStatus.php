@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Enums;
+
+enum GoalStatus: string
+{
+    case Active = 'active';
+    case Completed = 'completed';
+    case Cancelled = 'cancelled';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::Active => 'Berjalan',
+            self::Completed => 'Tercapai',
+            self::Cancelled => 'Dibatalkan',
+        };
+    }
+
+    public function filamentColor(): string
+    {
+        return match ($this) {
+            self::Active => 'info',
+            self::Completed => 'success',
+            self::Cancelled => 'gray',
+        };
+    }
+
+    public static function options(): array
+    {
+        return collect(self::cases())
+            ->mapWithKeys(fn (self $status): array => [$status->value => $status->label()])
+            ->all();
+    }
+}
